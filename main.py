@@ -129,46 +129,6 @@ def aff_tableau(tableau, player, zoom):
         ecrit(str(position), WHITE, 10, i * tuile_size * zoom + 5, (j) * tuile_size * zoom + 5, "")
         i += 1
 
-    # for x in range(-rayon,rayon):
-    #     position = (player.pos_i * nbcases_x) + x
-    #     pygame.draw.rect(ecran, WHITE, pygame.Rect(i * tuile_size * zoom, j * tuile_size * zoom, tuile_size*zoom, tuile_size*zoom), 1)
-    #     ecrit(str(x),WHITE,10, i * tuile_size * zoom + 5, j * tuile_size * zoom + 5,"")
-    #     # ecran.blit(tableau[position].big_image, (i * tuile_size * zoom, j * tuile_size * zoom))
-    #     i += 1
-    #     if i == nbcases_x:
-    #         i = 0
-    #         j += 1
-    #
-
-
-    print("------------------")
-    # for x in range(-rayon,rayon):
-    #     for y in range(-rayon,rayon):
-    #         position = player.pos_i - (nbcases_x*x) + x
-    #         print(tableau[position].val,end='')
-    #         ecran.blit(tableau[position].big_image, (i * tuile_size * zoom, j * tuile_size * zoom))
-    #         if (x == 0) and (y == 0):
-    #             player.rect.x = i * tuile_size * zoom
-    #             player.rect.y = j * tuile_size * zoom
-    #         i += 1
-    #         print()
-    #     i = 0
-    #     j += 1
-
-    # print("Tableau : ",len(tableau))
-    #
-    # for z in range(0,len(tableau)):
-    #     print("Z : ",z)
-    #     print("i : ",player.pos_i)
-    #     print("j : ", player.pos_j)
-    #     if (tableau[z].case_x == player.pos_i) and (tableau[z].case_y == player.pos_j):     # on est à la position i j du joueur
-    #         print(z)
-    #         exit()
-    #         i,j = 0,0
-    #         for x in range(-8,8):
-    #             for y in range(-8,8):
-    #                 ecran.blit(tableau[x+y].big_image,(i*tuile_size*zoom,j*tuile_size*zoom))
-
 
     for player in all_player:
         player.draw()

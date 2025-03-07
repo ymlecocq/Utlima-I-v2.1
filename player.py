@@ -21,6 +21,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = pygame.Rect((i, j, self.sizex*zoomtuile,self.sizey*zoomtuile))  # Rect adapté à la taille du sprite, zoom compris
         self.rect.x = i*tuile_size
         self.rect.y = j*tuile_size
+        self.pos_i = i
+        self.pos_j = j
         self.vel = 1
 
 

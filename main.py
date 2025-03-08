@@ -84,50 +84,30 @@ def aff_global_tableau(tableau,zoom):
 #--Aff tableau x cases autour du joueur -------------------------------------
 def aff_tableau(tableau, player, zoom):
     ecran.fill(BLACK)  # efface l'écran
-    # Affichage des cases
-    # for i in range(0,len(tableau)):
-    #     ecran.blit(tableau[i].big_image, (tableau[i].rect.x*zoom,tableau[i].rect.y*zoom))
 
-    rayon = -2
+    # Affichage des cases
+
+    rayon = -10
     i,j = 0,0
 
-    # # position du player dans le tableau
-    # position = (player.pos_i + (nbcases_x*player.pos_j))
-    # pygame.draw.rect(ecran, WHITE,
-    # pygame.Rect(i * tuile_size * zoom, j * tuile_size * zoom, tuile_size * zoom, tuile_size * zoom), 1)
-    # ecrit(str(position), WHITE, 10, i * tuile_size * zoom + 5, j * tuile_size * zoom + 5, "")
 
 
-    for x in range(-2,3):
-        print(x)
-        position = (player.pos_i + (nbcases_x * (player.pos_j-1) + x))
-        pygame.draw.rect(ecran, WHITE,
-        pygame.Rect(i * tuile_size * zoom, j * tuile_size * zoom, tuile_size * zoom, tuile_size * zoom), 1)
-        ecrit(str(position), WHITE, 10, i * tuile_size * zoom + 5, j * tuile_size * zoom + 5, "")
-        i += 1
+    for y in range(rayon,(rayon*-1)+1):
+        for x in range(rayon,(rayon*-1)+1):
+            position = (player.pos_i + (nbcases_x * (player.pos_j+y) + x))
+            coordx = (i) * tuile_size * zoom
+            coordy = (j) * tuile_size * zoom
+            ecran.blit(tableau[position].big_image, (coordx,coordy))
+            # pygame.draw.rect(ecran, WHITE,
+            # pygame.Rect(coordx, coordy, tuile_size * zoom, tuile_size * zoom), 1)
+            # ecrit(str(position), WHITE, 10, coordx + 5, coordy + 5, "")
+            if (x == 0) and (y ==0):
+                player.rect.x = i * tuile_size * zoom
+                player.rect.y = j * tuile_size * zoom
+            i += 1
+        i = 0
+        j += 1
 
-    i = 0
-    j += 1
-    for x in range(-2,3):
-        print(x)
-        position = (player.pos_i + (nbcases_x * player.pos_j) + x)
-        pygame.draw.rect(ecran, WHITE,
-        pygame.Rect(i * tuile_size * zoom, (j) * tuile_size * zoom, tuile_size * zoom, tuile_size * zoom), 1)
-        ecrit(str(position), WHITE, 10, i * tuile_size * zoom + 5, (j) * tuile_size * zoom + 5, "")
-        if (x == 0):    # emplacement player
-            player.rect.x = i * tuile_size * zoom
-            player.rect.y = j * tuile_size * zoom
-        i += 1
-
-    i = 0
-    j += 1
-    for x in range(-2,3):
-        print(x)
-        position = (player.pos_i + (nbcases_x * (player.pos_j+1)) + x)
-        pygame.draw.rect(ecran, WHITE,
-        pygame.Rect(i * tuile_size * zoom, (j) * tuile_size * zoom, tuile_size * zoom, tuile_size * zoom), 1)
-        ecrit(str(position), WHITE, 10, i * tuile_size * zoom + 5, (j) * tuile_size * zoom + 5, "")
-        i += 1
 
 
     for player in all_player:
@@ -152,7 +132,7 @@ tableau = tbl_from_map(map,nbcases_x,nbcases_y)
 # Création joueur
 # player = player.Player(22,20,2)
 # player = player.Player(16,34,2)
-player = player.Player(3,3,2)
+player = player.Player(25,30,2)
 all_player.add(player)
 all_sprites_list.add(player)
 

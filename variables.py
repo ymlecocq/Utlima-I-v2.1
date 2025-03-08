@@ -43,8 +43,8 @@ all_cases = pygame.sprite.Group()
 tableau = []
 
 # Taille du tableau
-nbcases_x = 9
-nbcases_y = 9
+nbcases_x = 128
+nbcases_y = 128
 tuile_size = 16
 
 

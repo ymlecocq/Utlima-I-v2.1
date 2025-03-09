@@ -31,7 +31,7 @@ size = [SCREEN_X, SCREEN_Y]
 ecran = pygame.display.set_mode(size)
 pygame.display.set_caption("TbL2D")
 
-clocktimer = 120     # vitesse rafraichissement écran
+clocktimer = 10     # vitesse rafraichissement écran
 clock = pygame.time.Clock()
 
 # init sprite groups

@@ -56,52 +56,25 @@ class Player(pygame.sprite.Sprite):
                 self.frame_min = 4
                 self.frame = self.frame_min
 
-    def update(self):
-
-        # player explose ?
-
+    def update(self, rayon):
+        print("update")
         # Captation des touches du clavier
         pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[pygame.K_UP] or joyup:  # press up : le joueur va en haut
+            if self.pos_j > 0:
+                self.pos_j -= 1
+        if pressed_keys[pygame.K_DOWN] or joydown:  # press up : le joueur va en bas
+            if self.pos_j < nbcases_y+rayon-5:
+                print("i : ",self.pos_j)
+                print("nbcases_y+rayon : ",nbcases_y+rayon-5)
+                self.pos_j += 1
+        if pressed_keys[pygame.K_LEFT] or motion[0]<0:  # press up : le joueur va à gauche
+            if self.pos_i > 0:
+                self.pos_i -= 1
+        if pressed_keys[pygame.K_RIGHT] or motion[0]>0 :  # press up : le joueur va à droite
+            if self.pos_i < nbcases_x:
+                self.pos_i += 1
 
-        # détection mouvements du Joystick--------------------------------------------------------
-        # joyx,joyy,joyup,joydown = False, False, False,False
-        # if abs(motion[0]) < 0.5:  # On gère la sensibilité du joy
-        #     motion[0] = 0
-        #     joyx = False
-        # if abs(motion[1]) < 0.5:
-        #     motion[1] = 0
-        #     joyy = False
-        #     joyup = False
-        #     joydown = False
-        # if motion[0] != 0:
-        #     joyx = True
-        # if motion[1] != 0:
-        #     joyy = True
-        #     if motion[1] < 0:
-        #         joyup = True
-        #     else:
-        #         joydown = True
-
-
-        # Collision avec un monstre ?
-
-
-
-        if pressed_keys[pygame.K_LEFT]  or motion[0]<0 :    # press <= : le joueur va à gauche
-            self.rect.x -= self.vel
-            print("gauche")
-            return  # pour quitter la fonction et éviter d'aller trop vite quand 2 touches de dir pressées simultanément
-
-        if pressed_keys[pygame.K_RIGHT] or motion[0]>0 :    # press => : le joueur va à droite
-            self.rect.x += self.vel
-            return
-
-        if pressed_keys[pygame.K_UP] or joyup:    # press up : le joueur va en haut
-            self.rect.y -= self.vel
-            return
-
-        if pressed_keys[pygame.K_DOWN] or joydown:    # press down : le joueur va en bas
-            self.rect.y += self.vel
-            return
-
+        if (pressed_keys[pygame.K_SPACE]):
+            print("Exit")
 

@@ -82,15 +82,13 @@ def aff_global_tableau(tableau,zoom):
         ecran.blit(big_image, (tableau[i].rect.x*zoom,tableau[i].rect.y*zoom))
     pygame.display.update()  # on affiche le tout
 #--Aff tableau x cases autour du joueur -------------------------------------
-def aff_tableau(tableau, player, zoom):
+def aff_tableau(tableau, player, zoom, rayon):
     ecran.fill(BLACK)  # efface l'écran
 
-    # Affichage des cases
+    # Affichage des cases autour ju joueur dans un rayon donné
 
-    rayon = -10
+    rayon = rayon*(-1)
     i,j = 0,0
-
-
 
     for y in range(rayon,(rayon*-1)+1):
         for x in range(rayon,(rayon*-1)+1):
@@ -109,12 +107,13 @@ def aff_tableau(tableau, player, zoom):
         j += 1
 
 
-
+    # affichage player aux nouvelles coordonnées rect.x & rect.y
     for player in all_player:
+        player.update(rayon)
         player.draw()
 
-    clock.tick(clocktimer)
-    pygame.display.update()  # on affiche le tout
+    clock.tick(clocktimer)      # rafraichissement écran
+    pygame.display.update()     # on affiche le tout
 # ----------------------------------------------------------------------------------------------------------------------
 def val_map(map,i,j):      # Affiche la valeur du tableau aux coordonnées i / j
     a = int(map[j][i])
@@ -130,8 +129,6 @@ tableau = tbl_from_map(map,nbcases_x,nbcases_y)
 # print(tableau[33].rect.y)
 
 # Création joueur
-# player = player.Player(22,20,2)
-# player = player.Player(16,34,2)
 player = player.Player(25,30,2)
 all_player.add(player)
 all_sprites_list.add(player)
@@ -142,16 +139,15 @@ while continuer:
 
     # Boucle qui tourne pendant le jeu en dehors de la gestion des évènements-------------------------------------------
     # aff_global_map(map, tuilesspritesheet, 32, 32,2)
-    aff_tableau(tableau,player,2)
-
+    aff_tableau(tableau,player,2,8)
 
     # captation des évènements-----------------------------------------------------------------
     for event in pygame.event.get():
+        # captation des évènements - ----------------------------------------------------------------
+        pressed = pygame.key.get_pressed()  # captation des évèvements claviers sous forme de liste
+        # permet de capter la répétition des frappes de touches
 
-        pressed = pygame.key.get_pressed()          # captation des évèvements claviers sous forme de liste
-                                                    # permet de capter la répétition des frappes de touches
-
-        if event.type == pygame.JOYAXISMOTION:      # détection stick analogique du joystick
+        if event.type == pygame.JOYAXISMOTION:  # détection stick analogique du joystick
             if event.axis < 2:
                 motion[event.axis] = event.value
 
@@ -163,6 +159,5 @@ while continuer:
         # Evènements clavier-------------------------------------------------------------------------
         # KEYDOWN permet de savoir si une touche a été pressée
         # moins rapide que get_pressed, permet de n'avoir qu'une seule touche pressée
-        if event.type == pygame.KEYDOWN:  # Utilisateur presse une touche
-            exit()
-
+        if event.type == pygame.K_UP:  # Utilisateur presse une touche
+            player.update()  # on appelle la fonction de fleche_menu
